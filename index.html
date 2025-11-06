@@ -1,0 +1,1266 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Practice Hub</title>
+    <link id="favicon" rel="icon" href="default-favicon.ico" type="image/x-icon">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f7fa;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: #2c5aa0;
+            color: white;
+            padding: 24px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+        }
+
+        .logo-text h1 {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text p {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-top: 2px;
+        }
+
+        .student-info {
+            text-align: right;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 24px;
+        }
+
+        .assessment-card {
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .assessment-header {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+        }
+
+        .assessment-header h2 {
+            font-size: 24px;
+            color: #2c5aa0;
+            margin-bottom: 8px;
+        }
+
+        .assessment-meta {
+            font-size: 14px;
+            color: #718096;
+        }
+
+        .question {
+            margin-bottom: 32px;
+            padding: 20px;
+            background: #f8fafc;
+            border-left: 4px solid #2c5aa0;
+            border-radius: 4px;
+        }
+
+        .question-number {
+            font-weight: 600;
+            color: #2c5aa0;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .question-text {
+            font-size: 16px;
+            margin-bottom: 16px;
+            color: #2d3748;
+        }
+
+        .math-expression {
+            font-family: 'Courier New', monospace;
+            background: white;
+            padding: 12px 16px;
+            border-radius: 4px;
+            border: 1px solid #cbd5e0;
+            display: inline-block;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #cbd5e0;
+            border-radius: 4px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #2c5aa0;
+        }
+
+        .submit-btn {
+            background: #2c5aa0;
+            color: white;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: background 0.2s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: #234a87;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 24px;
+            color: #718096;
+            font-size: 13px;
+        }
+
+        .instructions {
+            background: #e6f2ff;
+            border: 1px solid #bee3f8;
+            border-radius: 4px;
+            padding: 16px;
+            margin-bottom: 24px;
+            font-size: 14px;
+            color: #2c5aa0;
+        }
+
+        .verification-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .verification-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 32px;
+            border-radius: 4px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .modal-content h3 {
+            color: #2c5aa0;
+            margin-bottom: 16px;
+            font-size: 20px;
+        }
+
+        .modal-content p {
+            margin-bottom: 20px;
+            color: #4a5568;
+        }
+
+        /* GameHub styles */
+        .gamehub {
+            display: none;
+        }
+
+        .gamehub.active {
+            display: block;
+        }
+
+        body.game-mode {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            color: #fff;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 48px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 24px 60px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            color: white;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 14px 32px;
+            background: #fff;
+            color: #000;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            border-radius: 4px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .games-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 48px 80px;
+            background: transparent;
+            height: 100vh;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            letter-spacing: -1px;
+            color: white;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 20px;
+        }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 32px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .game-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .game-card:hover::before {
+            opacity: 1;
+        }
+
+        .game-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .game-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            position: relative;
+            z-index: 1;
+            color: white;
+        }
+
+        .game-desc {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* URL Sharing Modal */
+        .url-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .url-modal.active {
+            display: flex;
+        }
+
+        .url-modal-content {
+            background: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+        }
+
+        .url-modal-header {
+            padding: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .url-modal-header h3 {
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover {
+            color: white;
+        }
+
+        .url-modal-body {
+            padding: 24px;
+        }
+
+        .url-form {
+            margin-bottom: 24px;
+        }
+
+        .url-form-group {
+            margin-bottom: 16px;
+        }
+
+        .url-form-group label {
+            display: block;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .url-form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            color: white;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .url-form-group input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .url-submit-btn {
+            background: white;
+            color: black;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+
+        .url-submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .url-submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .urls-list {
+            margin-top: 24px;
+        }
+
+        .urls-list h4 {
+            color: white;
+            font-size: 16px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .url-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 16px;
+            margin-bottom: 12px;
+            transition: all 0.2s;
+        }
+
+        .url-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .url-item-title {
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .url-item-link {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 13px;
+            text-decoration: none;
+            word-break: break-all;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .url-item-link:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .url-item-meta {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .loading-spinner {
+            text-align: center;
+            padding: 20px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .error-message {
+            background: rgba(255, 59, 48, 0.1);
+            border: 1px solid rgba(255, 59, 48, 0.3);
+            color: #ff3b30;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+
+        .success-message {
+            background: rgba(52, 199, 89, 0.1);
+            border: 1px solid rgba(52, 199, 89, 0.3);
+            color: #34c759;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Math Assessment Page -->
+    <div id="mathPage">
+        <div class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">📐</div>
+                    <div class="logo-text">
+                        <h1>Math Practice Hub</h1>
+                    </div>
+                </div>
+                <div class="student-info">
+                    <div><strong>Session:</strong> MP-2025-10293</div>
+                    <div><strong>Date:</strong> <span id="session-date"></span></div>
+
+                    <script>
+                    const dateEl = document.getElementById("session-date");
+                    const today = new Date();
+                    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                    dateEl.textContent = today.toLocaleDateString('en-US', options);
+                    </script>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="assessment-card">
+                <div class="assessment-header">
+                    <h2>Daily Math Question of the Day</h2>
+                    <div class="assessment-meta">
+                        <strong>Grade Level:</strong> 8th Grade | 
+                        <strong>Topic:</strong> Algebra & Geometry | 
+                        <strong>Daily Challenge</strong>
+                    </div>
+                </div>
+
+                <div class="instructions">
+                    <strong>Instructions:</strong> Solve today's math challenge and submit your answer. A new question is posted every day!
+                </div>
+
+                <form id="assessmentForm">
+                    <!-- Question will be inserted here dynamically -->
+                </form>
+            </div>
+        </div>
+
+        <div class="footer">
+            © 2025 Math Practice Hub | Supporting Student Success in Mathematics
+        </div>
+    </div>
+
+    <!-- Verification Modal -->
+    <div id="verificationModal" class="verification-modal">
+        <div class="modal-content">
+            <h3>🔐 Verification Required</h3>
+            <p>To proceed, please enter the verification code:</p>
+            <input type="text" id="verificationInput" placeholder="Enter verification code">
+            <button onclick="verifyCode()" class="submit-btn" style="margin-top: 16px;">Verify</button>
+        </div>
+    </div>
+
+    <!-- GameHub Page (hidden initially) -->
+    <div id="gameHub" class="gamehub">
+        <div class="games-container" id="games">
+            <div class="games-grid" id="gamesGrid"></div>
+        </div>
+    </div>
+
+    <!-- URL Sharing Modal -->
+    <div id="urlModal" class="url-modal">
+        <div class="url-modal-content">
+            <div class="url-modal-header">
+                <h3>🔗 Share Unblocked Sites</h3>
+                <button class="close-btn" onclick="closeUrlModal()">×</button>
+            </div>
+            <div class="url-modal-body">
+                <div id="messageContainer"></div>
+                
+                <form id="urlForm" class="url-form">
+                    <div class="url-form-group">
+                        <label for="siteTitle">Site Name</label>
+                        <input type="text" id="siteTitle" placeholder="e.g., Cool Math Games" required>
+                    </div>
+                    <div class="url-form-group">
+                        <label for="siteUrl">URL (without https://)</label>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="color: rgba(255,255,255,0.6); font-size: 14px;">https://</span>
+                            <input type="text" id="siteUrl" placeholder="example.com" required style="flex: 1;">
+                        </div>
+                    </div>
+                    <div class="url-form-group">
+                        <label for="siteDescription">Description (Optional)</label>
+                        <input type="text" id="siteDescription" placeholder="Brief description of the site">
+                    </div>
+                    <button type="submit" class="url-submit-btn" id="urlSubmitBtn">Add Site</button>
+                </form>
+
+                <div class="urls-list">
+                    <h4>Community Shared Sites</h4>
+                    <div id="urlsList">
+                        <div class="loading-spinner">Loading sites...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const SUPABASE_URL = 'https://ewfecnnxuqtzhlsuljqv.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV3ZmVjbm54dXF0emhsc3VsanF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE3OTAyMTksImV4cCI6MjA3NzM2NjIxOX0.QgDEhfh1kpZCxd7s7e4LnUlBk_ERv30DCF78-pSDlDM';
+
+        
+        let supabase = null;
+        
+        // Initialize Supabase
+        try {
+            supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        } catch (error) {
+            console.error('Failed to initialize Supabase:', error);
+        }
+
+        // Question bank - rotates daily (one question per day)
+        const questionBank = [
+            { text: 'Solve for x:', expr: '3x + 7 = 22', placeholder: 'Enter your answer' },
+            { text: 'What is the area of a circle with radius 5 cm? (Use π ≈ 3.14)', expr: null, placeholder: 'Enter your answer in cm²' },
+            { text: 'Simplify the expression:', expr: '2(4x - 3) + 5x', placeholder: 'Enter simplified form' },
+            { text: 'What is the slope of the line passing through points (2, 3) and (6, 11)?', expr: null, placeholder: 'Enter the slope' },
+            { text: 'A rectangular garden is 12 feet long and 8 feet wide. What is its perimeter?', expr: null, placeholder: 'Enter your answer in feet' },
+            { text: 'Solve for y:', expr: '5y - 12 = 33', placeholder: 'Enter your answer' },
+            { text: 'Find the volume of a rectangular prism with length 6 cm, width 4 cm, and height 3 cm.', expr: null, placeholder: 'Enter your answer in cm³' },
+            { text: 'Simplify the expression:', expr: '3(2x + 4) - 2x', placeholder: 'Enter simplified form' },
+            { text: 'What is the y-intercept of the equation y = 3x - 7?', expr: null, placeholder: 'Enter the y-intercept' },
+            { text: 'Solve for x:', expr: '2x + 15 = 39', placeholder: 'Enter your answer' },
+            { text: 'What is the circumference of a circle with diameter 10 cm? (Use π ≈ 3.14)', expr: null, placeholder: 'Enter your answer in cm' },
+            { text: 'Simplify the expression:', expr: '4(x - 2) + 3x + 8', placeholder: 'Enter simplified form' },
+            { text: 'Find the slope between points (-1, 4) and (3, 12).', expr: null, placeholder: 'Enter the slope' },
+            { text: 'A square has a perimeter of 48 inches. What is the length of one side?', expr: null, placeholder: 'Enter your answer in inches' },
+            { text: 'Solve for n:', expr: '7n - 8 = 20', placeholder: 'Enter your answer' },
+            { text: 'What is the area of a triangle with base 10 m and height 6 m?', expr: null, placeholder: 'Enter your answer in m²' },
+            { text: 'Simplify the expression:', expr: '5(2x + 1) - 3(x - 2)', placeholder: 'Enter simplified form' },
+            { text: 'What is the distance between points (1, 2) and (4, 6)?', expr: null, placeholder: 'Enter the distance' },
+            { text: 'If a rectangle has an area of 72 square meters and a width of 8 meters, what is its length?', expr: null, placeholder: 'Enter your answer in meters' },
+            { text: 'Solve for x:', expr: '4x - 9 = 27', placeholder: 'Enter your answer' },
+            { text: 'What is the surface area of a cube with side length 5 cm?', expr: null, placeholder: 'Enter your answer in cm²' },
+            { text: 'Simplify the expression:', expr: '6x + 2(3x - 5)', placeholder: 'Enter simplified form' },
+            { text: 'What is the midpoint between coordinates (2, 8) and (10, 4)?', expr: null, placeholder: 'Enter as (x, y)' },
+            { text: 'A circle has a radius of 7 cm. What is its area? (Use π ≈ 3.14)', expr: null, placeholder: 'Enter your answer in cm²' },
+            { text: 'Solve for a:', expr: '9a + 5 = 50', placeholder: 'Enter your answer' },
+            { text: 'What is the volume of a cylinder with radius 4 cm and height 10 cm? (Use π ≈ 3.14)', expr: null, placeholder: 'Enter your answer in cm³' },
+            { text: 'Simplify the expression:', expr: '8x - 2(x + 3)', placeholder: 'Enter simplified form' },
+            { text: 'Find the slope of the line y = -2x + 5.', expr: null, placeholder: 'Enter the slope' },
+            { text: 'The angles in a triangle measure 45°, 65°, and x°. What is x?', expr: null, placeholder: 'Enter your answer in degrees' },
+            { text: 'Solve for x:', expr: '6x - 14 = 22', placeholder: 'Enter your answer' }
+        ];
+        const games = [
+            {
+                icon: 'Gr',
+                title: 'Granny',
+                desc: 'Horror',
+html: `<!DOCTYPE html>
+<!-- Ultimate Game Stash file-->
+<!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ -->
+<html lang="en-us">
+<head>
+<title>Granny Original</title>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bubbls/granny@212c543a85b243c4a0b92211f557e760d83d2292/TemplateData/style.css">
+<script src="https://cdn.jsdelivr.net/gh/bubbls/granny@212c543a85b243c4a0b92211f557e760d83d2292/sdk.js"><\/script>
+<script type="text/javascript">
+window.SDK_OPTIONS = {
+    gameId: "jp112o3o4hzgrnc7zaewjkrfk282pul8",
+    onEvent: function (a) {
+        switch (a.name) {
+            case "SDK_GAME_PAUSE":
+                console.log("Oyun duraklatıldı, ses kapatılıyor...");
+                if (typeof myGameInstance !== 'undefined' && myGameInstance) {
+                    myGameInstance.SendMessage('AudioManager', 'MuteAudio');
+                }
+                break;
+            case "SDK_GAME_START":
+                console.log("Reklam bitti, oyun devam ediyor...");
+                if (typeof myGameInstance !== 'undefined' && myGameInstance) {
+                    myGameInstance.SendMessage('AudioManager', 'UnmuteAudio');
+                }
+                break;
+            case "SDK_READY":
+                console.log("SDK hazır.");
+                break;
+        }
+    }
+};
+(function (a, b, c) {
+    var d = a.getElementsByTagName(b)[0];
+    a.getElementById(c) || (a = a.createElement(b), a.id = c, a.src = "https://cdn.jsdelivr.net/gh/testamalame/sef@main/sedk.js", d.parentNode.insertBefore(a, d));
+})(document, "script", "gamemonetize-sdk");
+<\/script>
+<style>
+body { margin: 0; padding: 0; overflow: hidden; background: url('https://cdn.jsdelivr.net/gh/gru6nny/ohd@main/background.png') no-repeat center center fixed; background-size: cover; }
+#unity-container { position: absolute; width: 100%; height: 100%; left: 0; top: 0; }
+#unity-loading-bar { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 400px; height: 20px; background: rgba(0,0,0,0.5); border: 2px solid #ffffff; border-radius: 10px; display: block; }
+#unity-logo { position: absolute; top: calc(50% - 100px); left: 50%; transform: translateX(-50%); width: 200px; height: auto; }
+#unity-logo img { max-width: 100%; height: auto; }
+#unity-progress-bar-empty { width: 100%; height: 100%; position: relative; }
+#unity-progress-bar-full { position: absolute; top: 0; left: 0; width: 0%; height: 100%; background: #4caf50; border-radius: 8px; transition: width 0.3s ease; }
+#unity-warning { position: absolute; left: 50%; top: 5%; transform: translate(-50%); background: white; padding: 10px; display: none; border: 1px solid #ccc; border-radius: 5px; }
+</style>
+</head>
+<body>
+<div id="unity-container">
+<canvas id="unity-canvas" style="position: absolute; width: 100%; height: 100%"></canvas>
+<div id="unity-loading-bar">
+<div id="unity-logo"></div>
+<div id="unity-progress-bar-empty">
+<div id="unity-progress-bar-full"></div>
+</div>
+</div>
+<div id="unity-warning"></div>
+</div>
+<script>
+async function mergeUnityWebFiles(baseUrl, filePrefix, totalParts, extension) {
+    const partUrls = [];
+    for (let i = 1; i <= totalParts; i++) {
+        partUrls.push(\`\${baseUrl}/\${filePrefix}_part\${i}.\${extension}\`);
+    }
+    const buffers = [];
+    for (let i = 0; i < totalParts; i++) {
+        const response = await fetch(partUrls[i]);
+        if (!response.ok) throw new Error(\`Failed to load part: \${partUrls[i]}\`);
+        const buffer = await response.arrayBuffer();
+        buffers.push(buffer);
+        const progress = ((i + 1) / totalParts) * 100;
+        document.querySelector("#unity-progress-bar-full").style.width = \`\${progress}%\`;
+    }
+    const totalLength = buffers.reduce((acc, buffer) => acc + buffer.byteLength, 0);
+    const combinedBuffer = new Uint8Array(totalLength);
+    let offset = 0;
+    buffers.forEach((buffer) => {
+        combinedBuffer.set(new Uint8Array(buffer), offset);
+        offset += buffer.byteLength;
+    });
+    return combinedBuffer;
+}
+var container = document.querySelector("#unity-container");
+var canvas = document.querySelector("#unity-canvas");
+var loadingBar = document.querySelector("#unity-loading-bar");
+var progressBarFull = document.querySelector("#unity-progress-bar-full");
+var warningBanner = document.querySelector("#unity-warning");
+let myGameInstance = null;
+let isAdShown = false;
+function unityShowBanner(msg, type) {
+    function updateBannerVisibility() {
+        warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
+    }
+    var div = document.createElement('div');
+    div.innerHTML = msg;
+    warningBanner.appendChild(div);
+    if (type == 'error') div.style = 'background: red; padding: 10px;';
+    else {
+        if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
+        setTimeout(function() {
+            warningBanner.removeChild(div);
+            updateBannerVisibility();
+        }, 5000);
+    }
+    updateBannerVisibility();
+}
+function showAdOnClick() {
+    if (!isAdShown && typeof sdk !== 'undefined' && typeof sdk.showBanner !== 'undefined') {
+        sdk.showBanner();
+        isAdShown = true;
+    }
+}
+var buildUrl = "https://cdn.jsdelivr.net/gh/gru6nny/ohd@main/Build";
+var loaderUrl = buildUrl + "/Granny.loader.js";
+async function initializeGame() {
+    try {
+        const dataBuffer = await mergeUnityWebFiles(buildUrl, "Granny", 2, "data");
+        const wasmBuffer = await mergeUnityWebFiles(buildUrl, "Granny", 2, "wasm");
+        const dataBlobUrl = URL.createObjectURL(new Blob([dataBuffer], { type: "application/octet-stream" }));
+        const wasmBlobUrl = URL.createObjectURL(new Blob([wasmBuffer], { type: "application/octet-stream" }));
+        var config = {
+            dataUrl: dataBlobUrl,
+            frameworkUrl: buildUrl + "/Granny.framework.js",
+            codeUrl: wasmBlobUrl,
+            streamingAssetsUrl: "https://cdn.jsdelivr.net/gh/gru6nny/ohd@main/StreamingAssets",
+            companyName: "Anastasia Kazantseva",
+            productName: "Granny",
+            productVersion: "1.0",
+            showBanner: unityShowBanner,
+        };
+        var script = document.createElement("script");
+        script.src = loaderUrl;
+        script.onload = () => {
+            createUnityInstance(canvas, config, (progress) => {
+                progressBarFull.style.width = 100 * progress + "%";
+            }).then((unityInstance) => {
+                myGameInstance = unityInstance;
+                loadingBar.style.display = "none";
+                canvas.addEventListener('pointerdown', showAdOnClick);
+                canvas.addEventListener('touchstart', showAdOnClick);
+            }).catch((message) => { alert(message); });
+        };
+        document.body.appendChild(script);
+    } catch (error) {
+        console.error("Game initialization failed:", error);
+    }
+}
+initializeGame();
+<\/script>
+</body>
+</html>`
+},
+            {
+                icon: '🔗',
+                title: 'Share Sites',
+                desc: 'Add URLs',
+                action: 'openUrlModal'
+            }
+        ];
+
+        // Get today's question based on day of year
+        function getDayOfYear() {
+            const now = new Date();
+            const start = new Date(now.getFullYear(), 0, 0);
+            const diff = now - start;
+            const oneDay = 1000 * 60 * 60 * 24;
+            return Math.floor(diff / oneDay);
+        }
+
+        const dayIndex = getDayOfYear() % questionBank.length;
+        const todaysQuestion = questionBank[dayIndex];
+
+        // Check if already unlocked
+        const isUnlocked = localStorage.getItem('gameHubUnlocked') === 'true';
+
+        if (isUnlocked) {
+            // Already unlocked, go straight to game hub
+            showGameHub();
+        } else {
+            // Show math page - populate the question
+            const form = document.getElementById('assessmentForm');
+
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'question';
+            questionDiv.innerHTML = `
+                <div class="question-number">Question of the Day</div>
+                <div class="question-text">${todaysQuestion.text}</div>
+                ${todaysQuestion.expr ? `<div class="math-expression">${todaysQuestion.expr}</div>` : ''}
+                <input type="text" id="q1" name="q1" placeholder="${todaysQuestion.placeholder}" required>
+            `;
+            form.appendChild(questionDiv);
+
+            const submitBtn = document.createElement('button');
+            submitBtn.type = 'submit';
+            submitBtn.className = 'submit-btn';
+            submitBtn.textContent = 'Submit Answer';
+            form.appendChild(submitBtn);
+        }
+
+        function showGameHub() {
+            // Hide math page and modal
+            document.getElementById('mathPage').style.display = 'none';
+            document.getElementById('verificationModal').classList.remove('active');
+            
+            // Show game hub
+            document.getElementById('gameHub').classList.add('active');
+            document.body.classList.add('game-mode');
+            document.title = 'Google Classroom';
+            
+            // Set Google Classroom favicon
+            const link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+            link.type = 'image/x-icon';
+            link.rel = 'shortcut icon';
+            link.href = 'https://ssl.gstatic.com/classroom/favicon.png';
+            document.getElementsByTagName('head')[0].appendChild(link);
+            
+            // Load games
+            const grid = document.getElementById('gamesGrid');
+            grid.innerHTML = '';
+            games.forEach(game => {
+                const card = document.createElement('div');
+                card.className = 'game-card';
+                card.innerHTML = `
+                    <div class="game-icon">${game.icon}</div>
+                    <div class="game-title">${game.title}</div>
+                    <div class="game-desc">${game.desc}</div>
+                `;
+                card.onclick = () => {
+                    if (game.action === 'openUrlModal') {
+                        openUrlModal();
+                    } else if (game.html) {
+                        const win = window.open('about:blank');
+                        win.document.write(game.html);
+                        win.document.close();
+                    }
+                };
+                grid.appendChild(card);
+            });
+        }
+
+        // URL Modal Functions
+        function openUrlModal() {
+            document.getElementById('urlModal').classList.add('active');
+            loadUrls();
+        }
+
+        function closeUrlModal() {
+            document.getElementById('urlModal').classList.remove('active');
+        }
+
+        function showMessage(message, type = 'success') {
+            const container = document.getElementById('messageContainer');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = type === 'success' ? 'success-message' : 'error-message';
+            messageDiv.textContent = message;
+            container.innerHTML = '';
+            container.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 5000);
+        }
+
+        async function loadUrls() {
+            const urlsList = document.getElementById('urlsList');
+            urlsList.innerHTML = '<div class="loading-spinner">Loading sites...</div>';
+            
+            if (!supabase) {
+                urlsList.innerHTML = '<div class="error-message">Database connection not configured</div>';
+                return;
+            }
+
+            try {
+                const { data, error } = await supabase
+                    .from('shared_urls')
+                    .select('*')
+                    .order('created_at', { ascending: false })
+                    .limit(50);
+
+                if (error) throw error;
+
+                if (!data || data.length === 0) {
+                    urlsList.innerHTML = '<p style="color: rgba(255,255,255,0.5); text-align: center; padding: 20px;">No sites shared yet. Be the first!</p>';
+                    return;
+                }
+
+                urlsList.innerHTML = '';
+                data.forEach(url => {
+                    const item = document.createElement('div');
+                    item.className = 'url-item';
+                    
+                    const date = new Date(url.created_at).toLocaleDateString();
+                    
+                    item.innerHTML = `
+                        <div class="url-item-title">${escapeHtml(url.title)}</div>
+                        <a href="${escapeHtml(url.url)}" target="_blank" class="url-item-link">${escapeHtml(url.url)}</a>
+                        ${url.description ? `<div style="color: rgba(255,255,255,0.6); font-size: 13px; margin-bottom: 8px;">${escapeHtml(url.description)}</div>` : ''}
+                        <div class="url-item-meta">Shared on ${date}</div>
+                    `;
+                    
+                    urlsList.appendChild(item);
+                });
+            } catch (error) {
+                console.error('Error loading URLs:', error);
+                urlsList.innerHTML = '<div class="error-message">Failed to load sites. Please try again.</div>';
+            }
+        }
+
+        // Submit URL Form
+        document.getElementById('urlForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!supabase) {
+                showMessage('Database connection not configured', 'error');
+                return;
+            }
+
+            const submitBtn = document.getElementById('urlSubmitBtn');
+            const title = document.getElementById('siteTitle').value.trim();
+            let url = document.getElementById('siteUrl').value.trim().toLowerCase();
+            const description = document.getElementById('siteDescription').value.trim();
+
+            // Basic validation
+            if (!title || !url) {
+                showMessage('Please fill in all required fields', 'error');
+                return;
+            }
+
+            // Remove any protocol if user added it
+            url = url.replace(/^(https?:\/\/)?(www\.)?/, '');
+            
+            // Add https:// prefix for full URL
+            const fullUrl = 'https://' + url;
+
+            // Validate URL format
+            if (!isValidUrl(url)) {
+                showMessage('Please enter a valid website URL (e.g., example.com)', 'error');
+                return;
+            }
+
+            // Check against blocked content
+            if (isBlockedUrl(url)) {
+                showMessage('This site cannot be added. Please choose an educational or appropriate website.', 'error');
+                return;
+            }
+
+            try {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Adding...';
+
+                const { data, error } = await supabase
+                    .from('shared_urls')
+                    .insert([
+                        {
+                            title: title,
+                            url: fullUrl,
+                            description: description || null
+                        }
+                    ])
+                    .select();
+
+                if (error) throw error;
+
+                showMessage('Site added successfully!', 'success');
+                
+                // Reset form
+                document.getElementById('urlForm').reset();
+                
+                // Reload URLs
+                loadUrls();
+                
+            } catch (error) {
+                console.error('Error adding URL:', error);
+                showMessage('Failed to add site. Please try again.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Add Site';
+            }
+        });
+
+        // Validate URL format
+        function isValidUrl(url) {
+            // Basic URL pattern check
+            const urlPattern = /^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,}(:[0-9]{1,5})?(\/.*)?$/i;
+            return urlPattern.test(url);
+        }
+
+        // Check if URL contains blocked content
+        function isBlockedUrl(url) {
+            const blockedKeywords = [
+                // Adult content
+                'porn', 'xxx', 'sex', 'adult', 'nude', 'nsfw', 'hentai', 'xvideos', 
+                'pornhub', 'xhamster', 'redtube', 'youporn', 'xnxx', 'brazzers',
+                'onlyfans', 'chaturbate', 'stripchat', 'cam4', 'livejasmin',
+                
+                // Gambling
+                'casino', 'poker', 'gambling', 'betting', 'slots', 'jackpot',
+                
+                // Drugs/substances
+                'weed', 'cannabis', 'marijuana', 'drug', 'cocaine', 'heroin',
+                'meth', 'ecstasy', 'psychedelic',
+                
+                // Violence/weapons
+                'gore', 'bestgore', 'liveleak', 'rotten', 'shock',
+                
+                // Hate/extremism
+                'nazi', 'kkk', 'whitesupremacy', 'terrorism',
+                
+                // Piracy
+                'torrent', 'piratebay', 'kickass', '1337x', 'rarbg',
+                
+                // Dark web
+                'onion', 'tor', 'darkweb', 'deepweb',
+                
+                // Cheating/hacking
+                'hack', 'cheat', 'crack', 'keygen', 'warez',
+                
+                
+                // Dating
+                'tinder', 'bumble', 'dating', 'match.com', 'okcupid',
+            
+            ];
+
+            const blockedDomains = [
+                'pornhub.com', 'xvideos.com', 'xnxx.com', 'xhamster.com',
+                'redtube.com', 'youporn.com', 'tube8.com', 'spankbang.com',
+                'eporner.com', 'tnaflix.com', 'drtuber.com', 'keezmovies.com',
+                'onlyfans.com', 'fansly.com', 'manyvids.com',
+                'chaturbate.com', 'stripchat.com', 'cam4.com', 'myfreecams.com',
+                'reddit.com/r/nsfw', 'reddit.com/r/porn',
+                'thepiratebay.org', 'kickasstorrents.to', '1337x.to',
+                'rarbg.to', 'yts.mx', 'eztv.re',
+                'bestgore.com', 'liveleak.com', 'kaotic.com',
+                '4chan.org', '8chan.org', '8kun.top'
+            ];
+
+            const lowerUrl = url.toLowerCase();
+
+            // Check for blocked keywords
+            for (const keyword of blockedKeywords) {
+                if (lowerUrl.includes(keyword)) {
+                    return true;
+                }
+            }
+
+            // Check for exact domain matches
+            for (const domain of blockedDomains) {
+                if (lowerUrl === domain || lowerUrl.startsWith(domain + '/')) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        // Helper function to escape HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Kill switch - press Ctrl + Shift + X to exit
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'x') {
+                localStorage.removeItem('gameHubUnlocked');
+                location.reload();
+            }
+        });
+
+        // Check if any answer contains "curiosity"
+        document.getElementById('assessmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const answer = document.getElementById('q1').value.toLowerCase();
+
+            if (answer.includes('curiosity')) {
+                document.getElementById('verificationModal').classList.add('active');
+            } else {
+                alert('Answer submitted. Great work on today\'s challenge!');
+            }
+        });
+
+        function verifyCode() {
+            const code = document.getElementById('verificationInput').value;
+            
+            if (code === 'ifykyk') {
+                // Save unlock status
+                localStorage.setItem('gameHubUnlocked', 'true');
+                
+                // Show game hub
+                showGameHub();
+            } else {
+                alert('Incorrect verification code. Please try again.');
+                document.getElementById('verificationInput').value = '';
+            }
+        }
+
+        // Allow Enter key on verification input
+        document.getElementById('verificationInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                verifyCode();
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('urlModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeUrlModal();
+            }
+        });
+    </script>
+</body>
+</html>

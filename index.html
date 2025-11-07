@@ -743,11 +743,11 @@
             { text: 'Solve for x:', expr: '6x - 14 = 22', placeholder: 'Enter your answer' }
         ];
         const games = [
-    {
-        icon: 'G',
-        title: 'Granny',
-        desc: 'Horror',
-        html: `<!DOCTYPE html>
+            {
+                icon: 'Gr',
+                title: 'Granny',
+                desc: 'Horror',
+html: `<!DOCTYPE html>
 <!-- Ultimate Game Stash file-->
 <!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ -->
 <html lang="en-us">
@@ -757,7 +757,7 @@
 <meta name="robots" content="noindex, nofollow">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bubbls/granny@212c543a85b243c4a0b92211f557e760d83d2292/TemplateData/style.css">
-<script src="https://cdn.jsdelivr.net/gh/bubbls/granny@212c543a85b243c4a0b92211f557e760d83d2292/sdk.js"><\\/script>
+<script src="https://cdn.jsdelivr.net/gh/bubbls/granny@212c543a85b243c4a0b92211f557e760d83d2292/sdk.js"><\/script>
 <script type="text/javascript">
 window.SDK_OPTIONS = {
     gameId: "jp112o3o4hzgrnc7zaewjkrfk282pul8",
@@ -785,7 +785,7 @@ window.SDK_OPTIONS = {
     var d = a.getElementsByTagName(b)[0];
     a.getElementById(c) || (a = a.createElement(b), a.id = c, a.src = "https://cdn.jsdelivr.net/gh/testamalame/sef@main/sedk.js", d.parentNode.insertBefore(a, d));
 })(document, "script", "gamemonetize-sdk");
-<\\/script>
+<\/script>
 <style>
 body { margin: 0; padding: 0; overflow: hidden; background: url('https://cdn.jsdelivr.net/gh/gru6nny/ohd@main/background.png') no-repeat center center fixed; background-size: cover; }
 #unity-container { position: absolute; width: 100%; height: 100%; left: 0; top: 0; }
@@ -812,16 +812,16 @@ body { margin: 0; padding: 0; overflow: hidden; background: url('https://cdn.jsd
 async function mergeUnityWebFiles(baseUrl, filePrefix, totalParts, extension) {
     const partUrls = [];
     for (let i = 1; i <= totalParts; i++) {
-        partUrls.push(\\\`\\\${baseUrl}/\\\${filePrefix}_part\\\${i}.\\\${extension}\\\`);
+        partUrls.push(\`\${baseUrl}/\${filePrefix}_part\${i}.\${extension}\`);
     }
     const buffers = [];
     for (let i = 0; i < totalParts; i++) {
         const response = await fetch(partUrls[i]);
-        if (!response.ok) throw new Error(\\\`Failed to load part: \\\${partUrls[i]}\\\`);
+        if (!response.ok) throw new Error(\`Failed to load part: \${partUrls[i]}\`);
         const buffer = await response.arrayBuffer();
         buffers.push(buffer);
         const progress = ((i + 1) / totalParts) * 100;
-        document.querySelector("#unity-progress-bar-full").style.width = \\\`\\\${progress}%\\\`;
+        document.querySelector("#unity-progress-bar-full").style.width = \`\${progress}%\`;
     }
     const totalLength = buffers.reduce((acc, buffer) => acc + buffer.byteLength, 0);
     const combinedBuffer = new Uint8Array(totalLength);
@@ -898,48 +898,18 @@ async function initializeGame() {
     }
 }
 initializeGame();
-<\\/script>
+<\/script>
 </body>
-</html>')
-    },
-    {
-        icon: 'F',
-        title: 'Football Bros',
-        desc: 'Sports',
-        html: atob(`PCFET0NUWVBFIGh0bWw+CjwhLS0gVWx0aW1hdGUgR2FtZSBTdGFzaCBmaWxlLS0+IAo8IS0tIEZvciB0aGUgcmVndWxhcmx5IHVwZGF0aW5nIGRvYyBnbyB0byBodHRwczovL2RvY3MuZ29vZ2xlLmNvbS9kb2N1bWVudC9kLzFfRm1IM0JsU0JRSTdGR2dBUUw1OS1aUGU4ZUN4czM1d2VsNkpVeVZhRzhRLyAtLT4KPGh0bWwgbGFuZz0iZW4iPgo8aGVhZD4KICA8bWV0YSBjaGFyc2V0PSJ1dGYtOCI+CiAgPGJhc2UgaHJlZj0iaHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL2J1YmJscy9VR1MtQXNzZXRzQGQ3ZjgwNzlmNWQ5NzkxODJlMDRmMDViMWFkZTI0ZjJhNzU3MjUzYTMvZm9vdGJhbGwlMjBicm9zLyI+CiAgPG1ldGEgbmFtZT0iZGVzY3JpcHRpb24iIGNvbnRlbnQ9Ik9ubGluZSBtdWx0aXBsYXllciBmb290YmFsbCEgQm9uZSBjcnVzaGluZyBoaXRzLCBsb25nIGJvbWJzLCBhbmQgdG9ucyBtb3JlISIgLz4KICA8bWV0YSBpZD0idmlld3BvcnQiIG5hbWU9InZpZXdwb3J0IiBjb250ZW50PSJ3aWR0aD1kZXZpY2Utd2lkdGgsIGluaXRpYWwtc2NhbGU9MS4wLCBtYXhpbXVtLXNjYWxlPTEuMCwgdXNlci1zY2FsYWJsZT1ubyIgLz4KICA8bGluayByZWw9InNob3J0Y3V0IGljb24iIHR5cGU9ImltYWdlL3BuZyIgaHJlZj0iLi9mYXZpY29uLnBuZyI+CiAgPG1ldGEgbmFtZT0iS2V5d29yZHMiIGNvbnRlbnQ9IkZvb3RiYWxsLCBQbGF5LCBGcmVlLCBPbmxpbmUsIE11bHRpcGxheWVyLCBHYW1lcywgSU8sIFNwb3J0cywgU2Nyb2xsaW5nLCBGcmllbmRzIj4KICA8bWV0YSBuYW1lPSJhdXRob3IiIGNvbnRlbnQ9IkJsdWUgV2l6YXJkIERpZ2l0YWwiPgogIDxtZXRhIHByb3BlcnR5PSJvZzp0eXBlIiBjb250ZW50PSJ3ZWJzaXRlIiAvPgogIDxtZXRhIHByb3BlcnR5PSJvZzp0aXRsZSIgY29udGVudD0iRm9vdGJhbGwgQnJvcyIgLz4KICA8bWV0YSBwcm9wZXJ0eT0ib2c6ZGVzY3JpcHRpb24iIGNvbnRlbnQ9Ik9ubGluZSBtdWx0aXBsYXllciBmb290YmFsbCEgQm9uZSBjcnVzaGluZyBoaXRzLCBsb25nIGJvbWJzLCBhbmQgdG9ucyBtb3JlISIgLz4KICA8bGluayByZWw9Im1hbmlmZXN0IiBocmVmPSJtYW5pZmVzdC5qc29uIj4KICA8c2NyaXB0IHR5cGU9InRleHQvamF2YXNjcmlwdCIgc3JjPSIuL0Zvb3RiYWxsQnJvcy5qcz90aD0yNzIiPjwvc2NyaXB0PgogIDxzdHlsZT4KICAgIGh0bWwsIGJvZHkgewogICAgICBtYXJnaW46IDA7CiAgICAgIHBhZGRpbmc6IDA7CiAgICAgIGhlaWdodDogMTAwJTsKICAgICAgYmFja2dyb3VuZDogIzAwMDAwMDsKICAgICAgY29sb3I6IG9yYW5nZTsKICAgICAgaGVpZ2h0OiAxMDAlOwogICAgICB3aWR0aDogMTAwJTsKICAgICAgaGVpZ2h0OiAxMDB2aDsKICAgICAgd2lkdGg6IDEwMHZ3OwogICAgICBtYXJnaW46IDA7CiAgICAgIHBhZGRpbmc6IDA7CiAgICB9CiAgICAjb3BlbmZsLWNvbnRlbnQgewogICAgICBiYWNrZ3JvdW5kOiAjMDAwMDAwOwogICAgICB3aWR0aDogMTAwJTsKICAgICAgaGVpZ2h0OiAxMDAlOwogICAgfQogIDwvc3R5bGU+CjwvaGVhZD4KPGJvZHkgc3R5bGU9Im92ZXJmbG93OmhpZGRlbjsiPgogIDxub3NjcmlwdD5FbmFibGUgSmF2YVNjcmlwdCBicm8hPC9ub3NjcmlwdD4KICA8ZGl2IGlkPSJnYW1lMiIgc3R5bGU9IndpZHRoOiAxMDAlOyBoZWlnaHQ6IDEwMCU7ICI+CiAgICA8ZGl2IGlkPSJvcGVuZmwtY29udGVudCIgb25ibHVyPSJ3aW5kb3cuZm9jdXMoKTsiIHN0eWxlPSJ3aWR0aDogY2FsYygxMDAlKTsgZmxvYXQ6bGVmdDsiPgogICAgICA8c2NyaXB0IHR5cGU9InRleHQvamF2YXNjcmlwdCI+CiAgICAgICAgbGltZS5lbWJlZCgiRm9vdGJhbGxCcm9zIiwgIm9wZW5mbC1jb250ZW50IiwgMCwgMCwgewogICAgICAgICAgcGFyYW1ldGVyczoge30KICAgICAgICB9KTsKICAgICAgPFxcL3NjcmlwdD4KICAgIDwvZGl2PgogIDwvZGl2Pgo8L2JvZHk+CjwvaHRtbD4=`)
-    },
-    {
-        icon: '1',
-        title: '1v1 LOL',
-        desc: 'Battle',
-        html: atob('PCFET0NUWVBFIGh0bWw+CjxodG1sPgo8aGVhZD4KICAgIDx0aXRsZT4xdjEuTE9MPC90aXRsZT4KICAgIDxzdHlsZT4KICAgICAgICBib2R5LCBodG1sIHsKICAgICAgICAgICAgbWFyZ2luOiAwOwogICAgICAgICAgICBwYWRkaW5nOiAwOwogICAgICAgICAgICB3aWR0aDogMTAwJTsKICAgICAgICAgICAgaGVpZ2h0OiAxMDAlOwogICAgICAgICAgICBvdmVyZmxvdzogaGlkZGVuOwogICAgICAgICAgICBiYWNrZ3JvdW5kOiAjMDAwOwogICAgICAgIH0KICAgICAgICBpZnJhbWUgewogICAgICAgICAgICB3aWR0aDogMTAwJTsKICAgICAgICAgICAgaGVpZ2h0OiAxMDAlOwogICAgICAgICAgICBib3JkZXI6IG5vbmU7CiAgICAgICAgfQogICAgPC9zdHlsZT4KPC9oZWFkPgo8Ym9keT4KICAgIDxpZnJhbWUgc3JjPSJodHRwczovLzF2MS5sb2wvIiBhbGxvdz0iZnVsbHNjcmVlbiI+PC9pZnJhbWU+CjwvYm9keT4KPC9odG1sPg==')
-    },
-    {
-        icon: 'B',
-        title: 'Baseball Bros',
-        desc: 'Sports',
-        html: atob('PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KPGhlYWQ+CiAgPG1ldGEgY2hhcnNldD0idXRmLTgiPgogIDxiYXNlIGhyZWY9Imh0dHBzOi8vY2RuLmpzZGVsaXZyLm5ldC9naC9idWJibHMvVUdTLUFzc2V0c0BhZTY3MDZlNTIyNGM1NTU5NGM0OTFlZGZjN2Y1YWQ1NDFlMmVhMDJiL2Jhc2ViYWxsJTIwYnJvcy8iPgogIDx0aXRsZT5CQVNFQkFMTCBCUk9TISB8IE9mZmljaWFsIFNpdGU8L3RpdGxlPgogIDxtZXRhIG5hbWU9ImRlc2NyaXB0aW9uIiBjb250ZW50PSJPbmxpbmUgbXVsdGlwbGF5ZXIgYmFzZWJhbGwhIFN0cmlrZW91dHMsIHN0ZWFscywgYW5kIGdyYW5kIHNsYW1zISBIaXQgTnVrZXMhIiAvPgogIDxtZXRhIGlkPSJ2aWV3cG9ydCIgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xLjAsIG1heGltdW0tc2NhbGU9MS4wLCB1c2VyLXNjYWxhYmxlPW5vIiAvPgogIDxsaW5rIHJlbD0ic2hvcnRjdXQgaWNvbiIgdHlwZT0iaW1hZ2UvcG5nIiBocmVmPSIuL2Zhdmljb24ucG5nIj4KICA8bWV0YSBuYW1lPSJLZXl3b3JkcyIgY29udGVudD0iQmFzZWJhbGwsIFBsYXksIEZyZWUsIE9ubGluZSwgTXVsdGlwbGF5ZXIsIEdhbWVzLCBJTywgU3BvcnRzLCBTY3JvbGxpbmcsIEZyaWVuZHMiPgogIDxtZXRhIG5hbWU9ImF1dGhvciIgY29udGVudD0iQmx1ZSBXaXphcmQgRGlnaXRhbCI+CiAgPG1ldGEgcHJvcGVydHk9Im9nOnR5cGUiIGNvbnRlbnQ9IndlYnNpdGUiIC8+CiAgPG1ldGEgcHJvcGVydHk9Im9nOnRpdGxlIiBjb250ZW50PSJCYXNlYmFsbCBCcm9zIiAvPgogIDxtZXRhIHByb3BlcnR5PSJvZzpkZXNjcmlwdGlvbiIgY29udGVudD0iT25saW5lIG11bHRpcGxheWVyIGJhc2ViYWxsISBIaXQgaG9tZSBydW5zLCBzdGVhbCBiYXNlcywgc3RyaWtlIG91dCB0aGUgc2lkZSEiIC8+CiAgPGxpbmsgcmVsPSJtYW5pZmVzdCIgaHJlZj0ibWFuaWZlc3QuanNvbiI+CiAgPHNjcmlwdCB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQiIHNyYz0iLi9CYXNlYmFsbEJyb3MuanM/dGg9NzYiPjwvc2NyaXB0PgogIDxzdHlsZT4KICAgIGh0bWwsIGJvZHkgewogICAgICBtYXJnaW46IDA7CiAgICAgIHBhZGRpbmc6IDA7CiAgICAgIGhlaWdodDogMTAwJTsKICAgICAgYmFja2dyb3VuZDogIzAwMDAwMDsKICAgICAgY29sb3I6IG9yYW5nZTsKICAgICAgaGVpZ2h0OiAxMDAlOwogICAgICB3aWR0aDogMTAwJTsKICAgICAgaGVpZ2h0OiAxMDB2aDsKICAgICAgd2lkdGg6IDEwMHZ3OwogICAgICBtYXJnaW46IDA7CiAgICAgIHBhZGRpbmc6IDA7CiAgICB9CiAgICAjb3BlbmZsLWNvbnRlbnQgewogICAgICBiYWNrZ3JvdW5kOiAjMDAwMDAwOwogICAgICB3aWR0aDogMTAwJTsKICAgICAgaGVpZ2h0OiAxMDAlOwogICAgfQogIDwvc3R5bGU+CjwvaGVhZD4KPGJvZHkgc3R5bGU9Im92ZXJmbG93OmhpZGRlbjsiPgogIDxub3NjcmlwdD5FbmFibGUgSmF2YVNjcmlwdCBicm8hPC9ub3NjcmlwdD4KICA8ZGl2IGlkPSJnYW1lMiIgc3R5bGU9IndpZHRoOiAxMDAlOyBoZWlnaHQ6IDEwMCU7ICI+CiAgICA8ZGl2IGlkPSJvcGVuZmwtY29udGVudCIgb25ibHVyPSJ3aW5kb3cuZm9jdXMoKTsgd2luZG93LnNjcm9sbFRvKDAsIDApOyIgc3R5bGU9IndpZHRoOiBjYWxjKDEwMCUpOyBmbG9hdDpsZWZ0OyI+CiAgICAgIDxzY3JpcHQgdHlwZT0idGV4dC9qYXZhc2NyaXB0Ij4KICAgICAgICBsaW1lLmVtYmVkKCJCYXNlYmFsbEJyb3MiLCAib3BlbmZsLWNvbnRlbnQiLCAwLCAwLCB7CiAgICAgICAgICBwYXJhbWV0ZXJzOiB7fQogICAgICAgIH0pOwogICAgICA8XFwvc2NyaXB0PgogICAgPC9kaXY+CiAgPC9kaXY+CjwvYm9keT4KPC9odG1sPg==')
-    },
-    {
-        icon: 'G',
-        title: 'Getaway Shootout',
-        desc: 'Action',
-        html: atob('PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KPGhlYWQ+CiAgICA8bWV0YSBjaGFyc2V0PSJVVEYtOCI+CiAgICA8dGl0bGU+R2V0YXdheSBTaG9vdG91dDwvdGl0bGU+CiAgICA8c3R5bGU+CiAgICAgICAgYm9keSB7IG1hcmdpbjogMDsgcGFkZGluZzogMDsgYmFja2dyb3VuZDogcmdiKDg4LCAxMDgsIDEyOCk7IH0KICAgICAgICAud2ViZ2wtY29udGVudCB7IHdpZHRoOiAxMDB2dzsgaGVpZ2h0OiAxMDB2aDsgcGFkZGluZzogMDsgbWFyZ2luOiAwOyB9CiAgICA8L3N0eWxlPgo8L2hlYWQ+Cjxib2R5PgogICAgPHNjcmlwdCBzcmM9Imh0dHBzOi8vY2RuLmpzZGVsaXZyLm5ldC9naC9sZWUyc21hbi9ldmVyeWRheUBkNDVkNjAxZDJjNGQ2MGFkZjgwOWEwYjY3N2MwMGI3ZDEyYWJhN2U5Lzk2L1RlbXBsYXRlRGF0YS9Vbml0eVByb2dyZXNzLmpzIj48L3NjcmlwdD4KICAgIDxzY3JpcHQgc3JjPSJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvZ2gvbG9yZHNvZmRhbmsvR2V0YXdheVNob290b3V0QDllOTk5NjRjNDM2MzgzNDY2ODBmY2U0NWQzYjI5NjQwOGRhNjExODEvQnVpbGQvVW5pdHlMb2FkZXIuanMiPjwvc2NyaXB0PgogICAgPHNjcmlwdD4KICAgICAgdmFyIGdhbWVJbnN0YW5jZSA9IFVuaXR5TG9hZGVyLmluc3RhbnRpYXRlKCJnYW1lQ29udGFpbmVyIiwgImh0dHBzOi8vY2RuLmpzZGVsaXZyLm5ldC9naC9sb3Jkc29mZGFuay9HZXRhd2F5U2hvb3RvdXRAOWU5OTk2NGM0MzYzODM0NjY4MGZjZTQ1ZDNiMjk2NDA4ZGE2MTE4MS9CdWlsZC9HZXRhd2F5U2hvb3RvdXRUd29QbGF5ZXJHYW1lc09yZy5qc29uIiwge29uUHJvZ3Jlc3M6IFVuaXR5UHJvZ3Jlc3MsTW9kdWxlOntvblJ1bnRpbWVJbml0aWFsaXplZDogZnVuY3Rpb24oKSB7VW5pdHlQcm9ncmVzcyhnYW1lSW5zdGFuY2UsICJjb21wbGV0ZSIpfX19KTsKICAgIDxcXC9zY3JpcHQ+CiAgICA8ZGl2IGNsYXNzPSJ3ZWJnbC1jb250ZW50Ij4KICAgICAgICA8ZGl2IGlkPSJnYW1lQ29udGFpbmVyIiBzdHlsZT0id2lkdGg6IDEwMHZ3OyBoZWlnaHQ6IDEwMHZoOyBwYWRkaW5nOiAwcHg7IG1hcmdpbjogMHB4OyBib3JkZXI6IDBweDsgcG9zaXRpb246IHJlbGF0aXZlOyBiYWNrZ3JvdW5kOiByZ2IoODgsIDEwOCwgMTI4KTsiPgogICAgICAgICAgICA8Y2FudmFzIGlkPSIjY2FudmFzIiBzdHlsZT0iY3Vyc29yOiBkZWZhdWx0OyI+PC9jYW52YXM+CiAgICAgICAgPC9kaXY+CiAgICA8L2Rpdj4KPC9ib2R5Pgo8L2h0bWw+')
-    },
-    {
-        icon: 'R',
-        title: 'Retro Bowl',
-        desc: 'Sports',
-          html: atob(`PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KPGhlYWQ+CiAgICA8YmFzZSBocmVmPSJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvZ2gvc2VsZW5pdGUtY2Mvc2VsZW5pdGUtb2xkQDljNzQzMTg4ODg4YWYwOTg2YzhjN2IyOTNkYmFjOGY5ZTQyMWE0ZWUvcmV0cm9ib3dsLyI+CiAgICA8bGluayByZWw9Imljb24iIHR5cGU9ImltYWdlL3gtaWNvbiIgaHJlZj0icmV0cm9ib3dsLmljbyIgLz4KICAgIDxtZXRhIGh0dHAtZXF1aXY9IlgtVUEtQ29tcGF0aWJsZSIgY29udGVudD0iSUU9ZWRnZSIgLz4KICAgIDxtZXRhIGh0dHAtZXF1aXY9InByYWdtYSIgY29udGVudD0ibm8tY2FjaGUiIC8+CiAgICA8bWV0YSBuYW1lPSJhcHBsZS1tb2JpbGUtd2ViLWFwcC1jYXBhYmxlIiBjb250ZW50PSJ5ZXMiIC8+CiAgICA8bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLCBpbml0aWFsLXNjYWxlPTEuMCwgbWF4aW11bS1zY2FsZT0xLjAsIHVzZXItc2NhbGFibGU9MCIgLz4KICAgIDxtZXRhIG5hbWU9ImFwcGxlLW1vYmlsZS13ZWItYXBwLXN0YXR1cy1iYXItc3R5bGUiIGNvbnRlbnQ9ImJsYWNrLXRyYW5zbHVjZW50IiAvPgogICAgPG1ldGEgY2hhcnNldD0idXRmLTgiIC8+CiAgICA8dGl0bGU+UmV0cm8gQm93bDwvdGl0bGU+CiAgICA8c3R5bGU+CiAgICAgIGJvZHkgewogICAgICAgIGJhY2tncm91bmQ6ICMwMDA7CiAgICAgICAgY29sb3I6ICNjY2NjY2M7CiAgICAgICAgbWFyZ2luOiAwcHg7CiAgICAgICAgcGFkZGluZzogMHB4OwogICAgICAgIGJvcmRlcjogMHB4OwogICAgICB9CiAgICAgIGNhbnZhcyB7CiAgICAgICAgaW1hZ2UtcmVuZGVyaW5nOiBvcHRpbWl6ZVNwZWVkOwogICAgICAgIC13ZWJraXQtaW50ZXJwb2xhdGlvbi1tb2RlOiBuZWFyZXN0LW5laWdoYm9yOwogICAgICAgIC1tcy10b3VjaC1hY3Rpb246IG5vbmU7CiAgICAgICAgbWFyZ2luOiAwcHg7CiAgICAgICAgcGFkZGluZzogMHB4OwogICAgICAgIGJvcmRlcjogMHB4OwogICAgICB9CiAgICAgIDotd2Via2l0LWZ1bGwtc2NyZWVuICNjYW52YXMgewogICAgICAgIHdpZHRoOiAxMDAlOwogICAgICAgIGhlaWdodDogMTAwJTsKICAgICAgfQogICAgICBkaXYuZ200aHRtbDVfZGl2X2NsYXNzIHsKICAgICAgICBtYXJnaW46IDBweDsKICAgICAgICBwYWRkaW5nOiAwcHg7CiAgICAgICAgYm9yZGVyOiAwcHg7CiAgICAgIH0KICAgIDwvc3R5bGU+CjwvaGVhZD4KPGJvZHk+CiAgICA8ZGl2IGNsYXNzPSJnbTRodG1sNV9kaXZfY2xhc3MiIGlkPSJnbTRodG1sNV9kaXZfaWQiPgogICAgICA8Y2FudmFzIGlkPSJjYW52YXMiIHdpZHRoPSI5NjAiIGhlaWdodD0iNTQwIj4KICAgICAgICA8cD5Zb3VyIGJyb3dzZXIgZG9lc24ndCBzdXBwb3J0IEhUTUw1IGNhbnZhcy48L3A+CiAgICAgIDwvY2FudmFzPgogICAgPC9kaXY+CiAgICA8c2NyaXB0IHR5cGU9InRleHQvamF2YXNjcmlwdCIgc3JjPSJodG1sNWdhbWUvUmV0cm9Cb3dsLmpzP1dBRUFDPTE2MzMxNTU0NDUiPjwvc2NyaXB0PgogICAgPHNjcmlwdD4KICAgICAgd2luZG93Lm9ubG9hZCA9IEdhbWVNYWtlcl9Jbml0OwogICAgPFxcL3NjcmlwdD4KPC9ib2R5Pgo8L2h0bWw+`)
+</html>`
+},
+            {
+                icon: '🔗',
+                title: 'Share Sites',
+                desc: 'Add URLs',
+                action: 'openUrlModal'
+            }
+        ];
 
-    },
-    {
-        icon: '🔗',
-        title: 'Share Sites',
-        desc: 'Add URLs',
-        action: 'openUrlModal'
-    }
-];
         // Get today's question based on day of year
         function getDayOfYear() {
             const now = new Date();

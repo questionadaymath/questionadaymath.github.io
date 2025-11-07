@@ -743,11 +743,11 @@
             { text: 'Solve for x:', expr: '6x - 14 = 22', placeholder: 'Enter your answer' }
         ];
         const games = [
-            {
-                icon: 'Gr',
-                title: 'Granny',
-                desc: 'Horror',
-html: `<!DOCTYPE html>
+    {
+        icon: 'G',
+        title: 'Granny',
+        desc: 'Horror',
+        html: `<!DOCTYPE html>
 <!-- Ultimate Game Stash file-->
 <!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ -->
 <html lang="en-us">
@@ -901,15 +901,248 @@ initializeGame();
 <\/script>
 </body>
 </html>`
-},
-            {
-                icon: '🔗',
-                title: 'Share Sites',
-                desc: 'Add URLs',
-                action: 'openUrlModal'
-            }
-        ];
-
+    },
+    {
+        icon: 'F',
+        title: 'Football Bros',
+        desc: 'Sports',
+        html: `<!DOCTYPE html>
+<!-- Ultimate Game Stash file--> 
+<!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <base href="https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@d7f8079f5d979182e04f05b1ade24f2a757253a3/football%20bros/">
+  <meta name="description" content="Online multiplayer football! Bone crushing hits, long bombs, and tons more!" />
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="shortcut icon" type="image/png" href="./favicon.png">
+  <meta name="Keywords" content="Football, Play, Free, Online, Multiplayer, Games, IO, Sports, Scrolling, Friends">
+  <meta name="author" content="Blue Wizard Digital">
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Football Bros" />
+  <meta property="og:description" content="Online multiplayer football! Bone crushing hits, long bombs, and tons more!" />
+  <link rel="manifest" href="manifest.json">
+  <script type="text/javascript" src="./FootballBros.js?th=272"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #000000;
+      color: orange;
+      height: 100%;
+      width: 100%;
+      height: 100vh;
+      width: 100vw;
+      margin: 0;
+      padding: 0;
+    }
+    #openfl-content {
+      background: #000000;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body style="overflow:hidden;">
+  <noscript>Enable JavaScript bro!</noscript>
+  <div id="game2" style="width: 100%; height: 100%; ">
+    <div id="openfl-content" onblur="window.focus();" style="width: calc(100%); float:left;">
+      <script type="text/javascript">
+        lime.embed("FootballBros", "openfl-content", 0, 0, {
+          parameters: {}
+        });
+      </script>
+    </div>
+  </div>
+</body>
+</html>`
+    },
+    {
+        icon: '1',
+        title: '1v1 LOL',
+        desc: 'Battle',
+        html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1v1 LOL</title>
+    <style>
+        body { margin: 0; padding: 0; background: #000; }
+        .webgl-content { width: 100%; height: 100vh; }
+        #gameContainer { width: 100%; height: 100%; }
+    </style>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/gh/n-101-1/1@main/UnityProgress.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/n-101-1/1@main/2.7.js"></script>
+    <script type="text/javascript">
+      var gameInstance;
+      window.onload = function () {
+        gameInstance = UnityLoader.instantiate("gameContainer", "https://cdn.jsdelivr.net/gh/n-101-1/1@main/2.7.json", {
+          onProgress: UnityProgress,
+          Module: {
+            onRuntimeInitialized: function () {
+              UnityProgress(gameInstance, "complete");
+            },
+          },
+        });
+      };
+    </script>
+    <div class="webgl-content">
+      <div id="gameContainer" style="width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; position: relative; background: rgb(0, 0, 0);">
+        <canvas id="#canvas" style="width: 100%; height: 100%; cursor: default;"></canvas>
+      </div>
+    </div>
+</body>
+</html>`
+    },
+    {
+        icon: 'B',
+        title: 'Baseball Bros',
+        desc: 'Sports',
+        html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <base href="https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@ae6706e5224c55594c491edfc7f5ad541e2ea02b/baseball%20bros/">
+  <title>BASEBALL BROS! | Official Site</title>
+  <meta name="description" content="Online multiplayer baseball! Strikeouts, steals, and grand slams! Hit Nukes!" />
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="shortcut icon" type="image/png" href="./favicon.png">
+  <meta name="Keywords" content="Baseball, Play, Free, Online, Multiplayer, Games, IO, Sports, Scrolling, Friends">
+  <meta name="author" content="Blue Wizard Digital">
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Baseball Bros" />
+  <meta property="og:description" content="Online multiplayer baseball! Hit home runs, steal bases, strike out the side!" />
+  <link rel="manifest" href="manifest.json">
+  <script type="text/javascript" src="./BaseballBros.js?th=76"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #000000;
+      color: orange;
+      height: 100%;
+      width: 100%;
+      height: 100vh;
+      width: 100vw;
+      margin: 0;
+      padding: 0;
+    }
+    #openfl-content {
+      background: #000000;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body style="overflow:hidden;">
+  <noscript>Enable JavaScript bro!</noscript>
+  <div id="game2" style="width: 100%; height: 100%; ">
+    <div id="openfl-content" onblur="window.focus(); window.scrollTo(0, 0);" style="width: calc(100%); float:left;">
+      <script type="text/javascript">
+        lime.embed("BaseballBros", "openfl-content", 0, 0, {
+          parameters: {}
+        });
+      </script>
+    </div>
+  </div>
+</body>
+</html>`
+    },
+    {
+        icon: 'G',
+        title: 'Getaway Shootout',
+        desc: 'Action',
+        html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Getaway Shootout</title>
+    <style>
+        body { margin: 0; padding: 0; background: rgb(88, 108, 128); }
+        .webgl-content { width: 100vw; height: 100vh; padding: 0; margin: 0; }
+    </style>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/gh/lee2sman/everyday@d45d601d2c4d60adf809a0b677c00b7d12aba7e9/96/TemplateData/UnityProgress.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/lordsofdank/GetawayShootout@9e99964c43638346680fce45d3b296408da61181/Build/UnityLoader.js"></script>
+    <script>
+      var gameInstance = UnityLoader.instantiate("gameContainer", "https://cdn.jsdelivr.net/gh/lordsofdank/GetawayShootout@9e99964c43638346680fce45d3b296408da61181/Build/GetawayShootoutTwoPlayerGamesOrg.json", {onProgress: UnityProgress,Module:{onRuntimeInitialized: function() {UnityProgress(gameInstance, "complete")}}});
+    </script>
+    <div class="webgl-content">
+        <div id="gameContainer" style="width: 100vw; height: 100vh; padding: 0px; margin: 0px; border: 0px; position: relative; background: rgb(88, 108, 128);">
+            <canvas id="#canvas" style="cursor: default;"></canvas>
+        </div>
+    </div>
+</body>
+</html>`
+    },
+    {
+        icon: 'R',
+        title: 'Retro Bowl',
+        desc: 'Sports',
+        html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="https://cdn.jsdelivr.net/gh/selenite-cc/selenite-old@9c743188888af0986c8c7b293dbac8f9e421a4ee/retrobowl/">
+    <link rel="icon" type="image/x-icon" href="retrobowl.ico" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta charset="utf-8" />
+    <title>Retro Bowl</title>
+    <style>
+      body {
+        background: #000;
+        color: #cccccc;
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+      }
+      canvas {
+        image-rendering: optimizeSpeed;
+        -webkit-interpolation-mode: nearest-neighbor;
+        -ms-touch-action: none;
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+      }
+      :-webkit-full-screen #canvas {
+        width: 100%;
+        height: 100%;
+      }
+      div.gm4html5_div_class {
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+      }
+    </style>
+</head>
+<body>
+    <div class="gm4html5_div_class" id="gm4html5_div_id">
+      <canvas id="canvas" width="960" height="540">
+        <p>Your browser doesn't support HTML5 canvas.</p>
+      </canvas>
+    </div>
+    <script type="text/javascript" src="html5game/RetroBowl.js?WAEAC=1633155445"></script>
+    <script>
+      window.onload = GameMaker_Init;
+    </script>
+</body>
+</html>`
+    },
+    {
+        icon: '🔗',
+        title: 'Share Sites',
+        desc: 'Add URLs',
+        action: 'openUrlModal'
+    }
+];
         // Get today's question based on day of year
         function getDayOfYear() {
             const now = new Date();

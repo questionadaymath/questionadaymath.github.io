@@ -743,11 +743,11 @@
             { text: 'Solve for x:', expr: '6x - 14 = 22', placeholder: 'Enter your answer' }
         ];
         const games = [
-            {
-                icon: 'Gr',
-                title: 'Granny',
-                desc: 'Horror',
-html: `<!DOCTYPE html>
+    {
+        icon: 'G',
+        title: 'Granny',
+        desc: 'Horror',
+        html: `<!DOCTYPE html>
 <!-- Ultimate Game Stash file-->
 <!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ -->
 <html lang="en-us">
@@ -757,7 +757,7 @@ html: `<!DOCTYPE html>
 <meta name="robots" content="noindex, nofollow">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bubbls/granny@212c543a85b243c4a0b92211f557e760d83d2292/TemplateData/style.css">
-<script src="https://cdn.jsdelivr.net/gh/bubbls/granny@212c543a85b243c4a0b92211f557e760d83d2292/sdk.js"><\/script>
+<script src="https://cdn.jsdelivr.net/gh/bubbls/granny@212c543a85b243c4a0b92211f557e760d83d2292/sdk.js"><\\/script>
 <script type="text/javascript">
 window.SDK_OPTIONS = {
     gameId: "jp112o3o4hzgrnc7zaewjkrfk282pul8",
@@ -785,7 +785,7 @@ window.SDK_OPTIONS = {
     var d = a.getElementsByTagName(b)[0];
     a.getElementById(c) || (a = a.createElement(b), a.id = c, a.src = "https://cdn.jsdelivr.net/gh/testamalame/sef@main/sedk.js", d.parentNode.insertBefore(a, d));
 })(document, "script", "gamemonetize-sdk");
-<\/script>
+<\\/script>
 <style>
 body { margin: 0; padding: 0; overflow: hidden; background: url('https://cdn.jsdelivr.net/gh/gru6nny/ohd@main/background.png') no-repeat center center fixed; background-size: cover; }
 #unity-container { position: absolute; width: 100%; height: 100%; left: 0; top: 0; }
@@ -812,16 +812,16 @@ body { margin: 0; padding: 0; overflow: hidden; background: url('https://cdn.jsd
 async function mergeUnityWebFiles(baseUrl, filePrefix, totalParts, extension) {
     const partUrls = [];
     for (let i = 1; i <= totalParts; i++) {
-        partUrls.push(\`\${baseUrl}/\${filePrefix}_part\${i}.\${extension}\`);
+        partUrls.push(\\\`\\\${baseUrl}/\\\${filePrefix}_part\\\${i}.\\\${extension}\\\`);
     }
     const buffers = [];
     for (let i = 0; i < totalParts; i++) {
         const response = await fetch(partUrls[i]);
-        if (!response.ok) throw new Error(\`Failed to load part: \${partUrls[i]}\`);
+        if (!response.ok) throw new Error(\\\`Failed to load part: \\\${partUrls[i]}\\\`);
         const buffer = await response.arrayBuffer();
         buffers.push(buffer);
         const progress = ((i + 1) / totalParts) * 100;
-        document.querySelector("#unity-progress-bar-full").style.width = \`\${progress}%\`;
+        document.querySelector("#unity-progress-bar-full").style.width = \\\`\\\${progress}%\\\`;
     }
     const totalLength = buffers.reduce((acc, buffer) => acc + buffer.byteLength, 0);
     const combinedBuffer = new Uint8Array(totalLength);
@@ -898,11 +898,11 @@ async function initializeGame() {
     }
 }
 initializeGame();
-<\/script>
+<\\/script>
 </body>
-</html>`
-},
-            {
+</html>')
+    },
+    {
         icon: 'F',
         title: 'Football Bros',
         desc: 'Sports',
@@ -939,8 +939,7 @@ initializeGame();
         desc: 'Add URLs',
         action: 'openUrlModal'
     }
-        ];
-
+];
         // Get today's question based on day of year
         function getDayOfYear() {
             const now = new Date();
